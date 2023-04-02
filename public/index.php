@@ -8,7 +8,8 @@
 
 if (isset($_GET['path_'])) {
 
-    $path_to_file = "/home/damien/" .$_GET['path_'];
+    $path_to_file = str_replace("/home/damien","",$_GET['path_']);
+    $path_to_file = "/home/damien/" .$path_to_file;
 
     // $path_to_file = str_replace("%2F","/",$path_to_file);
 
@@ -105,6 +106,7 @@ if (isset($_POST['submit'])) {
         <div class="row m-0">
             <div class="col-md-5">';
         require '../templates/home.php';
+        $result = listFolderFiles("/home/damien");
         echo '</div>
         </div>
         </div>';
@@ -116,7 +118,7 @@ if (isset($_POST['submit'])) {
 function listFolderFiles($dir, $base="")
 {
 
-    $allowed = array('php', 'html', 'css', 'js', 'txt','pptx','png','jpg','jpeg','md','scss','sh','bash');
+    $allowed = array('php', 'html', 'css', 'js', 'txt','pptx','png','jpg','jpeg','md','scss','sh','bash','sql','pdf');
     $fileFolderList = scandir($dir);
     echo '<ul class="drop" id="menu">';
     foreach ($fileFolderList as $fileFolder) {
